@@ -1,0 +1,730 @@
+SQL*Plus: Release 18.0.0.0.0 - Production on Jeu. Oct. 5 03:51:18 2023
+Version 18.4.0.0.0
+
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
+
+Entrez le nom utilisateur : system
+Entrez le mot de passe :
+ERROR:
+ORA-01017: nom utilisateur/mot de passe non valide ; connexion refusÚe
+
+
+Entrez le nom utilisateur : system
+Entrez le mot de passe :
+
+ConnectÚ Ó :
+Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+
+SQL> alter session
+  2  set "_oracle_script"=true
+  3
+SQL>
+SQL> alter session set"_oracle_script"=true
+  2
+SQL> c
+SQL>
+SQL> cls
+SP2-0042: commande inconnue "cls" - reste de la ligne ignorÚ.
+SQL> alter session set "_ORACLE_SCRIPT"=true;
+
+Session modifiÚe.
+
+SQL> create user ecomi1 identified by ecomi1;
+
+Utilisateur crÚÚ.
+
+SQL> grant all privileges to ecomi;
+grant all privileges to ecomi
+                        *
+ERREUR Ó la ligne 1 :
+ORA-01917: l'utilisateur ou le r¶le 'ECOMI' n'existe pas
+
+
+SQL> grant all privileges to ecomi1;
+
+Autorisation de privilÞges (GRANT) acceptÚe.
+
+SQL> conn ecomi1/ecomi1;
+ConnectÚ.
+SQL> CREATE TABLE CLIENT (
+  2  IDCL CHAR(8) PRIMARY KEY,
+  3  NOMCL CHAR(8) NOT NULL,
+  4  ADRCL CHAR(8) NOT NULL,
+  5  ADRLIV CHAR(8),
+  6  EMAIL CHAR(8) CHECK (EMAIL LIKE ‘%@%’),
+  7  LOGIN CHAR(8),
+  8  MPASS CHAR(8),
+  9  CONSTRAINT CMPASS CHECK (LENGTH(MPASS)>=10)) ;*
+ 10
+SQL> CREATE TABLE CLIENT (
+
+SQL> IDCL CHAR(8) PRIMARY KEY,
+SP2-0734: commande inconnue au dÚbut de "IDCL CHAR(..." - le reste de la ligne est ignorÚ.
+SQL> NOMCL CHAR(8) NOT NULL,
+SP2-0734: commande inconnue au dÚbut de "NOMCL CHAR..." - le reste de la ligne est ignorÚ.
+SQL> ADRCL CHAR(8) NOT NULL,
+SP2-0734: commande inconnue au dÚbut de "ADRCL CHAR..." - le reste de la ligne est ignorÚ.
+SQL> ADRLIV CHAR(8),
+SP2-0734: commande inconnue au dÚbut de "ADRLIV CHA..." - le reste de la ligne est ignorÚ.
+SP2-0044: Pour la liste des commandes connues entrez HELP
+and et pour sortir EXIT.
+SQL> EMAIL CHAR(8) CHECK (EMAIL LIKE ‘%@%’),
+SP2-0734: commande inconnue au dÚbut de "EMAIL CHAR..." - le reste de la ligne est ignorÚ.
+SQL> LOGIN CHAR(8),
+SP2-0734: commande inconnue au dÚbut de "LOGIN CHAR..." - le reste de la ligne est ignorÚ.
+SQL> MPASS CHAR(8),
+SP2-0734: commande inconnue au dÚbut de "MPASS CHAR..." - le reste de la ligne est ignorÚ.
+SQL> CREATE TABLE CLIENT (
+  2  IDCL CHAR(8) PRIMARY KEY,
+  3  NOMCL CHAR(8) NOT NULL,
+  4  ADRCL CHAR(8) NOT NULL,
+  5  ADRLIV CHAR(8),
+  6  EMAIL CHAR(8) CHECK (EMAIL LIKE ‘%@%’),
+  7  LOGIN CHAR(8),
+  8  MPASS CHAR(8),
+  9  CONSTRAINT CMPASS CHECK (LENGTH(MPASS)>=10)) ;
+
+Table crÚÚe.
+
+SQL>  alter table client
+  2    2  modify nomcl varchar(20)
+  3    3  modify adrcl varchar2(25)
+  4    4  ;
+  2  modify nomcl varchar(20)
+  *
+ERREUR Ó la ligne 2 :
+ORA-01735: option ALTER TABLE non valide
+
+
+SQL> alter table client
+  2      modify nomcl varchar(20)
+  3      modify adrcl varchar2(25)
+  4      ;
+
+Table modifiÚe.
+
+SQL> alter table client
+  2   modify adrliv varchar(20)
+  3    modify email varchar2(25)
+  4  modify login varchar(20)
+  5   modify mpass varchar(20);
+
+Table modifiÚe.
+
+SQL> alter table client
+  2  add constraint clogoblig check( login not null)
+  3  ;
+add constraint clogoblig check( login not null)
+                                          *
+ERREUR Ó la ligne 2 :
+ORA-00920: opÚrateur relationnel non valide
+
+
+SQL> alter table client
+  2  add constraint clogoblig check( login not null);
+add constraint clogoblig check( login not null)
+                                          *
+ERREUR Ó la ligne 2 :
+ORA-00920: opÚrateur relationnel non valide
+
+
+SQL> alter table client
+  2      add constraint clogoblig check( login IS not null);
+
+Table modifiÚe.
+
+SQL> alter table client
+  2      add constraint clogoblig check( login IS not null);
+    add constraint clogoblig check( login IS not null)
+                   *
+ERREUR Ó la ligne 2 :
+ORA-02264: nom dÚjÓ utilisÚ par une contrainte existante
+
+
+SQL> insert into client values
+  2      ('05577968','Toumi Karim','Sousse zaouiet','sousse','toumkar@voila.fr','toumy@yahoo.fr','tkar1979karim');
+
+1 ligne crÚÚe.
+
+SQL> commit;
+
+Validation effectuÚe.
+
+SQL> insert into client values
+  2      ('05377968','Remadi wissem','Sousse graul','sousse','wissrm@voila.fr','rmdwess@yahoo.fr','ws1978remadrim');
+
+1 ligne crÚÚe.
+
+SQL> insert into client values
+  2      ('05376958','kuissi kamel','kasserine','sousse','kwisskam@gmail.com','kmki@yahoo.fr','kwiss1977karam');
+
+1 ligne crÚÚe.
+
+SQL> insert into client values
+  2      ('05376958','abidi ridha','sidi bouzid','sousse ksibet','ridham@gmail.com','ridhasou@yahoo.fr','awridhss1977youssef');
+insert into client values
+*
+ERREUR Ó la ligne 1 :
+ORA-00001: violation de contrainte unique (ECOMI1.SYS_C007655)
+
+
+SQL> insert into client values
+  2      ('05496958','abidi ridha','sidi bouzid','sousse ksibet','ridham@gmail.com','ridhasou@yahoo.fr','awridhss1977youssef');
+
+1 ligne crÚÚe.
+
+SQL> insert into client values
+  2      ('05496958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes');
+insert into client values
+*
+ERREUR Ó la ligne 1 :
+ORA-00001: violation de contrainte unique (ECOMI1.SYS_C007655)
+
+
+SQL> insert into client values
+  2
+SQL>     ('03436958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes');
+    ('03436958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes')
+     *
+ERREUR Ó la ligne 1 :
+ORA-00928: mot-clÚ SELECT absent
+
+
+SQL> insert into client values
+  2
+SQL>     ('03436958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes');
+    ('03436958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes')
+     *
+ERREUR Ó la ligne 1 :
+ORA-00928: mot-clÚ SELECT absent
+
+
+SQL>  insert into client values
+  2      ('03436958','abdelfateh hcin','Mahdia','ksour essef','hcin58@gmail.com','hcin58@yahoo.fr','hcin1977ilyes');
+
+1 ligne crÚÚe.
+
+SQL>  commit;
+
+Validation effectuÚe.
+
+SQL> select *
+  2      from client;
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05577968 Toumi Karim          Sousse zaouiet            sousse
+toumkar@voila.fr          toumy@yahoo.fr       tkar1979karim
+
+05377968 Remadi wissem        Sousse graul              sousse
+wissrm@voila.fr           rmdwess@yahoo.fr     ws1978remadrim
+
+05376958 kuissi kamel         kasserine                 sousse
+kwisskam@gmail.com        kmki@yahoo.fr        kwiss1977karam
+
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05496958 abidi ridha          sidi bouzid               sousse ksibet
+ridham@gmail.com          ridhasou@yahoo.fr    awridhss1977youssef
+
+03436958 abdelfateh hcin      Mahdia                    ksour essef
+hcin58@gmail.com          hcin58@yahoo.fr      hcin1977ilyes
+
+
+SQL> select *
+  2      from client;
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05577968 Toumi Karim          Sousse zaouiet            sousse
+toumkar@voila.fr          toumy@yahoo.fr       tkar1979karim
+
+05377968 Remadi wissem        Sousse graul              sousse
+wissrm@voila.fr           rmdwess@yahoo.fr     ws1978remadrim
+
+05376958 kuissi kamel         kasserine                 sousse
+kwisskam@gmail.com        kmki@yahoo.fr        kwiss1977karam
+
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05496958 abidi ridha          sidi bouzid               sousse ksibet
+ridham@gmail.com          ridhasou@yahoo.fr    awridhss1977youssef
+
+03436958 abdelfateh hcin      Mahdia                    ksour essef
+hcin58@gmail.com          hcin58@yahoo.fr      hcin1977ilyes
+
+
+SQL>
+SQL>    CREATE TABLE ARTICLE (
+  2     IDART CHAR(8) PRIMARY KEY,
+  3     DESART CHAR(8) NOT NULL,
+  4     DESCRITPION VARCHAR2(20) NOT NULL,
+  5     PU NUMBER(8,3),
+  6     QTESTK NUMBER(7) CHECK (QTESTK >0),
+  7     STKMIN NUMBER(4),
+  8     CONSTRAINT CSTKM CHECK (STKMIN BETWEEN 10 AND 50)) ;
+
+Table crÚÚe.
+
+SQL> insert into article values
+  2      ('01010101','adidas 42 sw','esp 42 ad',258.75,120,30);
+    ('01010101','adidas 42 sw','esp 42 ad',258.75,120,30)
+                *
+ERREUR Ó la ligne 2 :
+ORA-12899: valeur trop grande pour la colonne "ECOMI1"."ARTICLE"."DESART"
+(rÚelle : 12, maximum : 8)
+
+
+SQL> insert into article values
+  2      ('01010101','adidas 42 sw','esp 42 ad',258.75,120,30);
+    ('01010101','adidas 42 sw','esp 42 ad',258.75,120,30)
+                *
+ERREUR Ó la ligne 2 :
+ORA-12899: valeur trop grande pour la colonne "ECOMI1"."ARTICLE"."DESART"
+(rÚelle : 12, maximum : 8)
+
+
+SQL> alter table article
+  2  modify desart varchar(30);
+
+Table modifiÚe.
+
+SQL> insert into article values
+  2     ('01010101','adidas 42 sw','esp 42 ad',258.75,120,30);
+
+1 ligne crÚÚe.
+
+SQL> insert into article values
+  2     ('01010102','swatch sx','swatch smart',1258.75,80,15);
+
+1 ligne crÚÚe.
+
+SQL> insert into article values
+  2      ('01010103','IPHONE 14','IPH phone 14 ',4990,60,20);
+
+1 ligne crÚÚe.
+
+SQL> insert into article values
+  2      ('01010104','PC hp','Pc HP probook ',2300,77,40);
+
+1 ligne crÚÚe.
+
+SQL>
+SQL> commit;
+
+Validation effectuÚe.
+
+SQL> select * article;
+select * article
+         *
+ERREUR Ó la ligne 1 :
+ORA-00923: mot-clÚ FROM absent Ó l'emplacement prÚvu
+
+
+SQL> select * from article
+  2  ;
+
+IDART    DESART                         DESCRITPION                  PU
+-------- ------------------------------ -------------------- ----------
+    QTESTK     STKMIN
+---------- ----------
+01010101 adidas 42 sw                   esp 42 ad                258,75
+       120         30
+
+01010102 swatch sx                      swatch smart            1258,75
+        80         15
+
+01010103 IPHONE 14                      IPH phone 14               4990
+        60         20
+
+
+IDART    DESART                         DESCRITPION                  PU
+-------- ------------------------------ -------------------- ----------
+    QTESTK     STKMIN
+---------- ----------
+01010104 PC hp                          Pc HP probook              2300
+        77         40
+
+
+SQL> create table carte(
+  2  Idcarte char(10) primary key,
+  3  typec varchar(12) check(typec in('E-dinars','Visa','Mastercard')),
+  4  datexp char(7) check(SUBSTR(datexp,3,1)='/'),
+  5  NumeroCarte char(20) NOT NULL,
+  6  signaturecvv2 char(3),
+  7  constraint ccvv2 check (to_number(signaturecvv2) between 0 and 99));
+
+Table crÚÚe.
+
+SQL> insert into cart values('1','Edinars','12/2023','12345678','253');
+insert into cart values('1','Edinars','12/2023','12345678','253')
+            *
+ERREUR Ó la ligne 1 :
+ORA-00942: Table ou vue inexistante
+
+
+SQL> commit;
+
+Validation effectuÚe.
+
+SQL> insert into cart values('1','Edinars','12/2023','12345678','253');
+insert into cart values('1','Edinars','12/2023','12345678','253')
+            *
+ERREUR Ó la ligne 1 :
+ORA-00942: Table ou vue inexistante
+
+
+SQL> insert into carte values('1','Edinars','12/2023','12345678','253');
+insert into carte values('1','Edinars','12/2023','12345678','253')
+*
+ERREUR Ó la ligne 1 :
+ORA-02290: violation de contraintes (ECOMI1.CCVV2) de vÚrification
+
+
+SQL> insert into carte values('1','Edinars','12/2023','12345678','23');
+insert into carte values('1','Edinars','12/2023','12345678','23')
+*
+ERREUR Ó la ligne 1 :
+ORA-02290: violation de contraintes (ECOMI1.SYS_C007663) de vÚrification
+
+
+SQL> insert into carte values('1','Edinars','12/2023','12345678','3');
+insert into carte values('1','Edinars','12/2023','12345678','3')
+*
+ERREUR Ó la ligne 1 :
+ORA-02290: violation de contraintes (ECOMI1.SYS_C007663) de vÚrification
+
+
+SQL> insert into carte values('1','Edinars','12/2023','12345678','123');
+insert into carte values('1','Edinars','12/2023','12345678','123')
+*
+ERREUR Ó la ligne 1 :
+ORA-02290: violation de contraintes (ECOMI1.CCVV2) de vÚrification
+
+
+SQL> insert into carte values('1','Edinars','12/2023','12345678','13');
+insert into carte values('1','Edinars','12/2023','12345678','13')
+*
+ERREUR Ó la ligne 1 :
+ORA-02290: violation de contraintes (ECOMI1.SYS_C007663) de vÚrification
+
+
+SQL> insert into carte values('1','E-dinars','12/2023','12345678','13')
+  2  ;
+
+1 ligne crÚÚe.
+
+SQL> insert into carte values('2','Visa','12/2023','12345678','13');
+
+1 ligne crÚÚe.
+
+SQL> insert into carte values('3','Mastercard','12/2023','12345678','13');
+
+1 ligne crÚÚe.
+
+SQL> insert into carte values('4','Mastercard','12/2023','12345678','13');
+
+1 ligne crÚÚe.
+
+SQL> select *  from carte
+  2  ;
+
+IDCARTE    TYPEC        DATEXP  NUMEROCARTE          SIG
+---------- ------------ ------- -------------------- ---
+1          E-dinars     12/2023 12345678             13
+2          Visa         12/2023 12345678             13
+3          Mastercard   12/2023 12345678             13
+4          Mastercard   12/2023 12345678             13
+
+SQL> create table panier
+  2  (idpan integer primary key,
+  3  datec date default sysdate,
+  4  idcl references client(idcl));
+
+Table crÚÚe.
+
+SQL> select * from client
+  2  ;
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05577968 Toumi Karim          Sousse zaouiet            sousse
+toumkar@voila.fr          toumy@yahoo.fr       tkar1979karim
+
+05377968 Remadi wissem        Sousse graul              sousse
+wissrm@voila.fr           rmdwess@yahoo.fr     ws1978remadrim
+
+05376958 kuissi kamel         kasserine                 sousse
+kwisskam@gmail.com        kmki@yahoo.fr        kwiss1977karam
+
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05496958 abidi ridha          sidi bouzid               sousse ksibet
+ridham@gmail.com          ridhasou@yahoo.fr    awridhss1977youssef
+
+03436958 abdelfateh hcin      Mahdia                    ksour essef
+hcin58@gmail.com          hcin58@yahoo.fr      hcin1977ilyes
+
+
+SQL> select * from carte;
+
+IDCARTE    TYPEC        DATEXP  NUMEROCARTE          SIG
+---------- ------------ ------- -------------------- ---
+1          E-dinars     12/2023 12345678             13
+2          Visa         12/2023 12345678             13
+3          Mastercard   12/2023 12345678             13
+4          Mastercard   12/2023 12345678             13
+
+SQL> commit ;
+
+Validation effectuÚe.
+
+SQL> insert into panier values('1','05577968');
+insert into panier values('1','05577968')
+            *
+ERREUR Ó la ligne 1 :
+ORA-00947: nombre de valeurs insuffisant
+
+
+SQL> insert into panier values('1','12/25/2023','05577968');
+insert into panier values('1','12/25/2023','05577968')
+                              *
+ERREUR Ó la ligne 1 :
+ORA-01843: ce n'est pas un mois valide
+
+
+SQL> insert into panier values('1','12/5/2023','05577968');
+
+1 ligne crÚÚe.
+
+SQL> insert into panier values('1','12/4/2023','05577968');
+insert into panier values('1','12/4/2023','05577968')
+*
+ERREUR Ó la ligne 1 :
+ORA-00001: violation de contrainte unique (ECOMI1.SYS_C007667)
+
+
+SQL> insert into panier values('2','12/4/2023','05577968');
+
+1 ligne crÚÚe.
+
+SQL> insert into panier values('3','','05577968');
+
+1 ligne crÚÚe.
+
+SQL> select * from panier
+  2  ;
+
+     IDPAN DATEC    IDCL
+---------- -------- --------
+         1 12/05/23 05577968
+         2 12/04/23 05577968
+         3          05577968
+
+SQL> insert into panier values('3',default,'05577968');
+insert into panier values('3',default,'05577968')
+*
+ERREUR Ó la ligne 1 :
+ORA-00001: violation de contrainte unique (ECOMI1.SYS_C007667)
+
+
+SQL> delete from table where(datec='');
+delete from table where(datec='')
+            *
+ERREUR Ó la ligne 1 :
+ORA-00903: nom de table non valide
+
+
+SQL> delete from panier where(datec='');
+
+0 lignes supprimÚes.
+
+SQL> delete from panier where(DATEC=null);
+
+0 lignes supprimÚes.
+
+SQL> delete from panier where(idpan=3);
+
+1 ligne supprimÚe.
+
+SQL> select * from panier ;
+
+     IDPAN DATEC    IDCL
+---------- -------- --------
+         1 12/05/23 05577968
+         2 12/04/23 05577968
+
+SQL> show tables
+SP2-0158: option SHOW inconnue "tables"
+SQL> insert into panier (idpan,idcl)
+  2  (3,'05577968');
+(3,'05577968')
+ *
+ERREUR Ó la ligne 2 :
+ORA-00928: mot-clÚ SELECT absent
+
+
+SQL> insert into panier (idpan,idcl)
+  2  values
+  3  (3,'05577968');
+
+1 ligne crÚÚe.
+
+SQL> select * from panier
+  2  ;
+
+     IDPAN DATEC    IDCL
+---------- -------- --------
+         1 12/05/23 05577968
+         2 12/04/23 05577968
+         3 05/10/23 05577968
+
+SQL> create table commande(
+  2  numc char(10) primary key,
+  3  datec date,
+  4  idpan references panier(idpan),
+  5  mntc float);
+
+Table crÚÚe.
+
+SQL> create table paiment(
+  2  numero number(7) primary key,
+  3  numc references commande(numc),
+  4  dateep date default sysdate,
+  5  ncarte references carte(Idcarte));
+
+Table crÚÚe.
+
+SQL> commit;
+
+Validation effectuÚe.
+
+SQL> insert into commande values('1','12/12/2023','1',120.33);
+
+1 ligne crÚÚe.
+
+SQL> insert into commande values('2','12/12/2023','2',120.33);
+
+1 ligne crÚÚe.
+
+SQL> insert into commande values('3','12/12/2023','3',120.33);
+
+1 ligne crÚÚe.
+
+SQL> select * from commande;
+
+NUMC       DATEC         IDPAN       MNTC
+---------- -------- ---------- ----------
+1          12/12/23          1     120,33
+2          12/12/23          2     120,33
+3          12/12/23          3     120,33
+
+SQL> select * from carte;
+
+IDCARTE    TYPEC        DATEXP  NUMEROCARTE          SIG
+---------- ------------ ------- -------------------- ---
+1          E-dinars     12/2023 12345678             13
+2          Visa         12/2023 12345678             13
+3          Mastercard   12/2023 12345678             13
+4          Mastercard   12/2023 12345678             13
+
+SQL>  insert into paiment (numero,numc,ncarte) values(1,1,1);
+
+1 ligne crÚÚe.
+
+SQL>  insert into paiment (numero,numc,ncarte) values(2,2,2);
+
+1 ligne crÚÚe.
+
+SQL>  insert into paiment (numero,numc,ncarte) values(3,3,3);
+
+1 ligne crÚÚe.
+
+SQL> commit
+  2  ;
+
+Validation effectuÚe.
+
+SQL> select * from client ;
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05577968 Toumi Karim          Sousse zaouiet            sousse
+toumkar@voila.fr          toumy@yahoo.fr       tkar1979karim
+
+05377968 Remadi wissem        Sousse graul              sousse
+wissrm@voila.fr           rmdwess@yahoo.fr     ws1978remadrim
+
+05376958 kuissi kamel         kasserine                 sousse
+kwisskam@gmail.com        kmki@yahoo.fr        kwiss1977karam
+
+
+IDCL     NOMCL                ADRCL                     ADRLIV
+-------- -------------------- ------------------------- --------------------
+EMAIL                     LOGIN                MPASS
+------------------------- -------------------- --------------------
+05496958 abidi ridha          sidi bouzid               sousse ksibet
+ridham@gmail.com          ridhasou@yahoo.fr    awridhss1977youssef
+
+03436958 abdelfateh hcin      Mahdia                    ksour essef
+hcin58@gmail.com          hcin58@yahoo.fr      hcin1977ilyes
+
+
+SQL> select * from panier;
+
+     IDPAN DATEC    IDCL
+---------- -------- --------
+         1 12/05/23 05577968
+         2 12/04/23 05577968
+         3 05/10/23 05577968
+
+SQL> select * from carte;
+
+IDCARTE    TYPEC        DATEXP  NUMEROCARTE          SIG
+---------- ------------ ------- -------------------- ---
+1          E-dinars     12/2023 12345678             13
+2          Visa         12/2023 12345678             13
+3          Mastercard   12/2023 12345678             13
+4          Mastercard   12/2023 12345678             13
+
+SQL> select * from panier;
+
+     IDPAN DATEC    IDCL
+---------- -------- --------
+         1 12/05/23 05577968
+         2 12/04/23 05577968
+         3 05/10/23 05577968
+
+SQL> select * from commande;
+
+NUMC       DATEC         IDPAN       MNTC
+---------- -------- ---------- ----------
+1          12/12/23          1     120,33
+2          12/12/23          2     120,33
+3          12/12/23          3     120,33
+
+SQL> select * from paiment;
+
+    NUMERO NUMC       DATEEP   NCARTE
+---------- ---------- -------- ----------
+         1 1          05/10/23 1
+         2 2          05/10/23 2
+         3 3          05/10/23 3
