@@ -1,1 +1,132 @@
-https://docs.google.com/document/d/1OuOslGyj0xSOhQ1LjyoDmt9yAMYUYdBhIJj9N4--WVo/edit?usp=drivesdk
+
+Oracle Live is a web-based tool that allows you to write and execute SQL queries against an Oracle database. It does not support all of the commands in the image you sent, but it does support the following:
+
+SQL
+SELECT column
+FROM table
+WHERE condition
+GROUP BY column
+HAVING condition
+ORDER BY column ASC|DESC
+
+
+You can use these commands to perform the following tasks:
+Display the maximum, minimum, and average salary of all employees, as well as the total salary of all employees:
+
+SQL
+SELECT MAX(salary), MIN(salary), AVG(salary), SUM(salary) AS total_salary
+FROM employees
+
+
+Display the maximum salary, minimum salary, sum of salaries, and average salary of all employees, grouped by department:
+
+SQL
+SELECT department_id, MAX(salary), MIN(salary), SUM(salary) AS total_salary, AVG(salary) AS average_salary
+FROM employees
+GROUP BY department_id
+ORDER BY average_salary DESC
+
+
+Display the maximum salary, minimum salary, sum of salaries, and average salary of each job title:
+
+SQL
+SELECT job_id, MAX(salary), MIN(salary), SUM(salary) AS total_salary, AVG(salary) AS average_salary
+FROM employees
+GROUP BY job_id
+ORDER BY average_salary DESC
+
+
+Display the total number of employees:
+
+SQL
+SELECT COUNT(*) AS total_employees
+FROM employees
+
+
+Display the number of employees in each department:
+
+SQL
+SELECT department_id, COUNT(*) AS number_of_employees
+FROM employees
+GROUP BY department_id
+ORDER BY number_of_employees DESC
+
+
+Display the number of employees who occupy multiple positions:
+
+SQL
+SELECT COUNT(*) AS number_of_employees_with_multiple_positions
+FROM (
+  SELECT employee_id
+  FROM employees
+  GROUP BY employee_id
+  HAVING COUNT(DISTINCT job_id) > 1
+)
+
+
+Display the total number of department IDs (including and excluding null values):
+
+SQL
+SELECT COUNT(department_id) AS total_department_ids,
+       COUNT(NVL(department_id, 0)) AS total_department_ids_including_nulls
+FROM employees
+
+
+Display the total number of distinct department IDs (including and excluding null values):
+
+SQL
+SELECT COUNT(DISTINCT department_id) AS total_distinct_department_ids,
+       COUNT(DISTINCT NVL(department_id, 0)) AS total_distinct_department_ids_including_nulls
+FROM employees
+
+
+Display the following information for employees with the job ID SA REP: the lowest salary, the highest salary, and the dates of recruitment for the first and last employees:
+
+SQL
+SELECT MIN(salary) AS lowest_salary,
+       MAX(salary) AS highest_salary,
+       MIN(hire_date) AS first_employee_hire_date,
+       MAX(hire_date) AS last_employee_hire_date
+FROM employees
+WHERE job_id = 'SA REP'
+
+
+Display the average salary by department:
+
+SQL
+SELECT department_id, AVG(salary) AS average_salary
+FROM employees
+GROUP BY department_id
+ORDER BY average_salary DESC
+
+
+Display the department number and the sum of commissions for each department, excluding null commissions:
+
+SQL
+SELECT department_id, SUM(NVL(commission_pct, 0)) AS total_commissions
+FROM employees
+GROUP BY department_id
+ORDER BY total_commissions DESC
+
+
+Display the department number, job ID, and number of employees in each job ID for each department, excluding null commissions:
+
+SQL
+SELECT department_id, job_id, COUNT(*) AS number_of_employees
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY department_id, job_id
+ORDER BY department_id, job_id
+
+
+Display the number of employees who have left their jobs, grouped by the year they left and their job ID, ordered by the number of employees in each group in decreasing order, followed by the year they left in increasing order:
+
+SQL
+SELECT termination_year, job_id, COUNT(*) AS number_of_employees
+FROM employees
+WHERE termination_date IS NOT NULL
+GROUP BY termination_year, job_id
+ORDER BY number_of_employees DESC, termination_year ASC
+
+
+Display the average salary and number of employees for each job ID, excluding job IDs with an average salary less than or equal to 10000 and a number of employees equal to 1, ordered by average salary in ascending order:
