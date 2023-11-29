@@ -1,17 +1,22 @@
---1 
-select max(salary),min(salary),avg(salary),sum(salary) from hr.employees; 
---2 
-select round(max(salary)) as MAX,round(min(salary)) as MIN ,round(avg(salary)) as AVERAGE,round(sum(salary)) as SUM from hr.employees; 
+--1
+select max(salary),min(salary),avg(salary),sum(salary) from hr.employees;
+--2
+select round(max(salary)) as MAX,round(min(salary)) as MIN ,round(avg(salary)) as AVERAGE,round(sum(salary)) as SUM from hr.employees;
 --3 
-select max(salary),min(salary),avg(salary),sum(salary),job_id from hr.employees group by job_id ; 
---4 
-select count(*) as nombre_employées from hr.employees; 
---5 
-SELECT d.department_name, COUNT(e.employee_id) AS nombre_employes FROM hr.departments d LEFT JOIN hr.employees e ON d.department_id = e.department_id GROUP BY d.department_name; 
+select max(salary),min(salary),avg(salary),sum(salary),job_id from hr.employees group by job_id ;
+--4
+select count(*) as nombre_employées from hr.employees;
+--5
+SELECT d.department_name, COUNT(e.employee_id) AS nombre_employes
+FROM hr.departments d
+LEFT JOIN hr.employees e ON d.department_id = e.department_id
+GROUP BY d.department_name; 
 --6 
 select job_id,count (employee_id) from hr.employees group by job_id ;
 --7 
-select count(department_id) as nombre_total_departments from hr.employees where department_id IS NOT NULL;
+select count(department_id) as nombre_total_departments from hr.employees;
+
+select count (nvl(department_id,0)) as nombre_total_departments from hr.employees;
 --8
 
 --9
@@ -20,7 +25,7 @@ SELECT MIN(salary) AS lowest_salary,
       to_char( MIN(hire_date) ,'DD/MM/YYYY')AS first_employee_hire_date,
       to_char( MAX(hire_date),'DD/MM/YYYY') AS last_employee_hire_date
 FROM HR.employees
-WHERE job_id = 'SA_REP'
+WHERE job_id = 'SA_REP' 
 --10
 SELECT department_id, AVG(salary) AS average_salary
 FROM HR.employees
@@ -35,14 +40,8 @@ FROM HR.employees
 GROUP BY department_id
 ORDER BY total_commissions DESC
 --12
-SELECT department_id, job_id, COUNT(*) AS number_of_employees
+SELECT department_id, job_id, sum(commission_pct) AS number_of_employees
 FROM  HR.employees
 WHERE commission_pct IS NOT NULL
 GROUP BY department_id, job_id
 ORDER BY department_id, job_id
---13
-SELECT termination_year, job_id, COUNT(*) AS number_of_employees
-FROM  HR.employees
-WHERE termination_date IS NOT NULL
-GROUP BY termination_year, job_id
-ORDER BY number_of_employees DESC, termination_year ASC
