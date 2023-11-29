@@ -29,7 +29,9 @@ ORDER BY average_salary DESC
 
 --11
 SELECT department_id, SUM(NVL(commission_pct, 0)) AS total_commissions
-FROM employees
+FROM HR.employees
+    WHERE 
+    commission_pct IS NOT NULL
 GROUP BY department_id
 ORDER BY total_commissions DESC
 --12
